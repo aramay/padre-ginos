@@ -6,6 +6,7 @@ const props = [
   {
     name: "The Big Meat Pizza",
     description: "Bacon, Pepperoni, Italian Sausage, Chorizo Sausage",
+    img: "/public/pizzas/hawaiian.webp",
   },
 ];
 const App = () => {
@@ -17,7 +18,5 @@ const App = () => {
 };
 
 const container = document.getElementById("root");
-console.log(container);
-// const root = ReactDOM.createRoot(container);
 const root = createRoot(container);
 root.render(<App />);

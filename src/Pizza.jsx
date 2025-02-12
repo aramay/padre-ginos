@@ -8,6 +8,7 @@ const Pizza = ({ menu }) => {
       <div className="pizza" key={index}>
         <h1>{menu.name}</h1>
         <p>{menu.description}</p>
+        <img src={menu.img}></img>
       </div>
     );
   });
