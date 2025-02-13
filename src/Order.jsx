@@ -1,3 +1,4 @@
+import { useState } from "react";
 import Pizza from "./Pizza";
 
 const props = [
@@ -10,8 +11,8 @@ const props = [
 
 // named function will show in stack trace
 export default function Order() {
-  const pizzaType = "pepperoni";
-  const pizzaSize = "M";
+  const [pizzaType, setPizzaType] = useState("pepperoni");
+  const [pizzaSize, setPizzaSize] = useState("M");
 
   return (
     <div className="order">
@@ -20,10 +21,15 @@ export default function Order() {
         <div>
           <div>
             <label htmlFor="pizza-type">Pizza Type</label>
-            <select name="pizza-type" value={pizzaType}></select>
-            <option value="pepporoni">The pepporoni Pizza</option>
-            <option value="Hawaiian">Hawaiian</option>
-            <option value="big_meat">The Big Meat Pizza</option>
+            <select
+              onChange={(e) => setPizzaType(e.target.value)}
+              name="pizza-type"
+              value={pizzaType}
+            >
+              <option value="pepporoni">The pepporoni Pizza</option>
+              <option value="Hawaiian">Hawaiian</option>
+              <option value="big_meat">The Big Meat Pizza</option>
+            </select>
           </div>
 
           <div>
@@ -31,6 +37,7 @@ export default function Order() {
             <div>
               <span>
                 <input
+                  onChange={(e) => setPizzaSize(e.target.value)}
                   type="radio"
                   checked={pizzaSize === "S"}
                   name="pizza-size"
@@ -40,6 +47,7 @@ export default function Order() {
                 <label htmlFor="pizza-s">Small</label>
               </span>
               <input
+                onChange={(e) => setPizzaSize(e.target.value)}
                 checked={pizzaSize === "M"}
                 type="radio"
                 name="pizza-size"
@@ -50,6 +58,7 @@ export default function Order() {
 
               <span>
                 <input
+                  onChange={(e) => setPizzaSize(e.target.value)}
                   checked={pizzaSize === "L"}
                   type="radio"
                   name="pizza-size"
