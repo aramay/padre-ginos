@@ -1,18 +1,11 @@
 // import React from "react";
 import { createRoot } from "react-dom/client";
-import Pizza from "./Pizza";
+import Order from "./Order";
 
-const props = [
-  {
-    name: "The Big Meat Pizza",
-    description: "Bacon, Pepperoni, Italian Sausage, Chorizo Sausage",
-    img: "/public/pizzas/hawaiian.webp",
-  },
-];
 const App = () => {
   return (
     <div>
-      <Pizza menu={props} />
+      <Order />
     </div>
   );
 };
