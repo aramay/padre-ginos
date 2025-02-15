@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Pizza from "./Pizza";
 
 const props = [
@@ -9,10 +9,54 @@ const props = [
   },
 ];
 
+const intl = new Intl.NumberFormat("en-US", {
+  style: "currency",
+  currency: "USD",
+});
+
 // named function will show in stack trace
 export default function Order() {
+  const [pizzaTypes, setPizzaTypes] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [pizzaType, setPizzaType] = useState("pepperoni");
   const [pizzaSize, setPizzaSize] = useState("M");
+
+  let price, selectedPizza;
+
+  if (!loading) {
+    // console.log(pizzaTypes);
+    selectedPizza = pizzaTypes.find((pizza) => {
+      console.log(pizza);
+      return pizzaType === pizza.id;
+    });
+    price = intl.format(
+      selectedPizza.sizes ? selectedPizza.sizes[pizzaSize] : "",
+    );
+  }
+
+  useEffect(() => {
+    fetchPizzaTypes();
+  }, []);
+
+  async function fetchPizzaTypes() {
+    // await new Promise((resolve) => setTimeout(resolve, 3000));
+
+    const pizzaRes = await fetch("/api/pizzas");
+    const pizzaJson = await pizzaRes.json();
+
+    setPizzaTypes(pizzaJson);
+    setLoading(false);
+  }
+
+  let options = pizzaTypes.map((pizza) => {
+    return (
+      <>
+        <option key={pizza.id} value={pizza.id}>
+          {pizza.name}
+        </option>
+      </>
+    );
+  });
 
   return (
     <div className="order">
@@ -26,9 +70,7 @@ export default function Order() {
               name="pizza-type"
               value={pizzaType}
             >
-              <option value="pepporoni">The pepporoni Pizza</option>
-              <option value="Hawaiian">Hawaiian</option>
-              <option value="big_meat">The Big Meat Pizza</option>
+              {options}
             </select>
           </div>
 
@@ -71,9 +113,10 @@ export default function Order() {
           </div>
           <button type="submit">Add to Cart</button>
         </div>
+
         <div className="order-pizza">
           <Pizza menu={props} />
-          <p>$13.37</p>
+          <p>{price}</p>
         </div>
       </form>
     </div>
