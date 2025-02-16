@@ -26,7 +26,7 @@ export default function Order() {
   if (!loading) {
     // console.log(pizzaTypes);
     selectedPizza = pizzaTypes.find((pizza) => {
-      console.log(pizza);
+      // console.log(pizza);
       return pizzaType === pizza.id;
     });
     price = intl.format(
@@ -115,7 +115,8 @@ export default function Order() {
         </div>
 
         <div className="order-pizza">
-          <Pizza menu={props} />
+          {loading ? <h1>loading</h1> : <Pizza menu={selectedPizza} />}
+
           <p>{price}</p>
         </div>
       </form>
