@@ -1,14 +1,6 @@
 import { useState, useEffect } from "react";
 import Pizza from "./Pizza";
 
-const props = [
-  {
-    name: "The Big Meat Pizza",
-    description: "Bacon, Pepperoni, Italian Sausage, Chorizo Sausage",
-    img: "/public/pizzas/hawaiian.webp",
-  },
-];
-
 const intl = new Intl.NumberFormat("en-US", {
   style: "currency",
   currency: "USD",
