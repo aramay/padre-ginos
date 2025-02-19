@@ -24,11 +24,13 @@ const PizzaOfTheDay = () => {
           </p>
         </div>
         <img
-          src={pizzaOfTheDay}
+          src={pizzaOfTheDay.image}
           alt={pizzaOfTheDay.name}
-          className="pizza-of-the-day-iamge"
+          className="pizza-of-the-day-image"
         />
       </div>
     </div>
   );
 };
+
+export default PizzaOfTheDay;
