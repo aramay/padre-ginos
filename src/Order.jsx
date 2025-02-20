@@ -12,6 +12,22 @@ export default function Order() {
   const [loading, setLoading] = useState(true);
   const [pizzaType, setPizzaType] = useState("pepperoni");
   const [pizzaSize, setPizzaSize] = useState("M");
+  const [cart, setCart] = useState([]);
+
+  async function checkout() {
+    setLoading(true);
+    await fetch("api/order", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        cart: cart,
+      }),
+    });
+    setLoading(false);
+    setCart([]);
+  }
 
   let price, selectedPizza;
 
